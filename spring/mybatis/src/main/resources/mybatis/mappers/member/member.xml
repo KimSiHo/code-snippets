@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="me.bigmonkey.mybatis.dao.mybatis.member.MemberMapper">
+
+  <!--enum 사용법-->
+  <select id="getIntegratedMemberList" parameterType="com.etoos.member.admin.dto.request.MemberInfoRequest"
+    resultType="com.etoos.member.admin.dto.response.MemberResponse">
+    select m.member_no,
+    m.state memberState,
+    m.regist_date regDate,
+    m.first_regist_type,
+    mi.name
+    from t_member m
+    left join t_member_info mi on m.member_no = mi.member_no
+    where
+        true
+    <if test='firstRegistType != null'>
+      and m.first_regist_type = #{firstRegistType}
+    </if>
+    <if test='memberState != null'>
+      <choose>
+        <when test="memberState.name() == 'MSE001'">
+          and m.state = 'MSC001'
+        </when>
+        <when test="memberState.name() == 'MSE002'">
+          and m.state = 'MSC003'
+        </when>
+        <when test="memberState.name() == 'MSE003'">
+          and m.state = 'MSC004'
+        </when>
+        <when test="searchMode.name() == 'MSM003'">
+          and mn.nickname like CONCAT('%', #{searchContent}, '%')
+        </when>
+        <when test="searchMode.name() == 'MSM004'">
+          and ma.id_type = 'IDT001'
+          and ma.id like CONCAT('%', #{searchContent}, '%')
+        </when>
+      </choose>
+    </if>
+    <if test='seq != null and seq != ""'>
+      and seq_service_maintenance = #{seq}
+    </if>
+    <if test='startQ != null and endQ != null'>
+      and m.regist_date >= #{startQ}
+      and m.regist_date <![CDATA[<]]> #{endQ}
+    </if>
+    order by m.member_no desc
+  </select>
+
+  <!--다양한 조건-->
+
+  <!--where
+  start_date <![CDATA[<=]]> sysdate()
+  and end_date <![CDATA[>=]]> sysdate()-->
+
+  <!--해쉬 맵 사용, in 쿼리-->
+  <select id="getMemberAccountList" parameterType="java.util.HashMap"
+    resultType="com.etoos.member.admin.dto.response.MemberAccountResponse">
+    select ma.member_no,
+    ma.id,
+    ma.id_type
+    from t_member_account ma
+    where
+    ma.id_state = 'IDS001'
+    <choose>
+      <when test="member_no_list.size != 0">
+        and ma.member_no in
+        <foreach collection="member_no_list" item="item" separator="," open="(" close=")">
+          #{item}
+        </foreach>
+      </when>
+    </choose>
+  </select>
+
+  <select id="getServiceProfileLog"
+    parameterType="java.util.HashMap"
+    resultType="com.etoos.member.admin.dto.response.LegacyServiceLogResponse">
+
+    select spl.change_type changeType,
+           spl.before_info,
+           spl.after_info,
+           spl.regist_date regDateTime
+    from t_service_profile_log spl
+    where spl.member_no = #{memberNo} and spl.seq_service_terms_agree = #{seq} and (spl.change_type = 'PFT051' or spl.change_type = 'PFT052')
+    order by spl.regist_date desc
+  </select>
+
+  <!--롱형 변수 사용-->
+  <select id="getMemberBlockList"
+    parameterType="java.lang.Long"
+    resultType="com.etoos.member.admin.dto.response.MemberBlockDataResponse">
+    select block_type,
+           start_date startDateTime,
+           end_date endDateTime,
+           reason_code,
+           reason,
+           admin_id,
+           regist_date regDateTime,
+           block_state
+    from
+      t_member_block
+    where
+      member_no = #{memberNo} and block_type = 'BTC001'
+    order by regDateTime desc
+  </select>
+</mapper>

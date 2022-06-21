@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <settings>
+        <setting name="mapUnderscoreToCamelCase" value="true"/> <!-- 카멜케이스 적용 -->
+    </settings>
+
+    <mappers>
+        <mapper resource="mybatis/mappers/member/member.xml" />
+        <mapper resource="mybatis/mappers/member/memberBlock.xml" />
+        <mapper resource="mybatis/mappers/member/legacyServiceMember.xml" />
+        <mapper resource="mybatis/mappers/member/memberWithdraw.xml" />
+        <mapper resource="mybatis/mappers/member/serviceTermsAgree.xml" />
+        <mapper resource="mybatis/mappers/member/serviceProfileLog.xml" />
+        <mapper resource="mybatis/mappers/member/memberInfoChangeLog.xml"/>
+        <mapper resource="mybatis/mappers/member/memberAccount.xml"/>
+    </mappers>
+</configuration>
