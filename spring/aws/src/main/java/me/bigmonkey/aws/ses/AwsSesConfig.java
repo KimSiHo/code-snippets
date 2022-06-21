@@ -3,6 +3,7 @@ package me.bigmonkey.aws.ses;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import com.amazonaws.regions.Regions;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
@@ -26,7 +27,7 @@ public class AwsSesConfig {
 
         return AmazonSimpleEmailServiceClientBuilder.standard()
             .withCredentials(awsStaticCredentialsProvider)
-            .withRegion("ap-northeast-2")
+            .withRegion(Regions.AP_NORTHEAST_2)
             .build();
     }
 }
