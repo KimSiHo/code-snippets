@@ -1,4 +1,4 @@
-package me.bigmonkey.java.jcf;
+package me.bigmonkey.java.jcf.set;
 
 import java.util.HashSet;
 import java.util.Iterator;

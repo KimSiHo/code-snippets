@@ -1,4 +1,4 @@
-package me.bigmonkey.java.jcf;
+package me.bigmonkey.java.jcf.array;
 
 // 지역으로 배열 변수 선언해도 0으로 초기화 된다
 

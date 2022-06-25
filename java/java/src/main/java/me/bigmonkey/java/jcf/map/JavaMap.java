@@ -1,22 +1,23 @@
-package me.bigmonkey.java.jcf;
+package me.bigmonkey.java.jcf.map;
 
-import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
+import java.util.TreeMap;
 
 public class JavaMap {
 
     public static void main(String[] args) {
         JavaMap javaMap = new JavaMap();
 
-        //javaMap.test1();
+        javaMap.test1();
         javaMap.test2();
+        javaMap.test3();
+
     }
 
-    // HashMap 기초 사용법
+    // HashMap 기초 사용법 테스트
     private void test1() {
         // HashMap 선언
         Map<Integer, String> mapTest = new HashMap<>();
@@ -69,31 +70,51 @@ public class JavaMap {
 
         // HashMap removes all of the mappings from this map
         mapTest.clear();
+
+        System.out.println("============= test1 =============");
     }
 
+    // 키 정렬 comparator 방법
     private void test2() {
-        Map<String, Integer> hm = new HashMap<>();
+        // Map 선언
+        Map<Integer, String> testMap = new HashMap<>();
 
-        hm.put("key1", 1);
-        hm.put("key2", 2);
-        hm.put("key3", 3);
+        // Map에 데이터 추가
+        testMap.put(1, "apple");
+        testMap.put(4, "pineapple");
+        testMap.put(2, "orange");
+        testMap.put(5, "strawberry");
+        testMap.put(3, "melon");
 
-        if (hm.containsKey("key1") && hm.containsValue(1)) {
-            System.out.println("YES");
+        // 키로 정렬
+        Object[] mapkey = testMap.keySet().toArray();
+        Arrays.sort(mapkey);
+
+        // 결과 출력
+        for (Integer nKey : testMap.keySet()) {
+            System.out.println(testMap.get(nKey));
         }
 
-        hm.put("key1", hm.getOrDefault(("key1"), 0) * 10);
+        System.out.println("============= test2 =============");
+    }
 
-        List<String> keyList = new ArrayList<>(hm.keySet());
+    // key 정렬 treeMap 사용
+    private void test3() {
+        // Map 선언
+        Map<Integer, String> testMap = new TreeMap<>();
 
-        // 오름차순으로 키 정렬
-        Collections.sort(keyList, (s1, s2) -> Integer.compare(hm.get(s1), hm.get(s2)));
+        // Map에 데이터 저장
+        testMap.put(1, "apple");
+        testMap.put(5, "pineapple");
+        testMap.put(2, "orange");
+        testMap.put(3, "strawberry");
+        testMap.put(4, "melon");
 
-        // 출력
-        for (String s : keyList) {
-            System.out.println(s + " = " + hm.get(s));
+        // 결과 출력
+        for (Integer nKey : testMap.keySet())
+        {
+            System.out.println(testMap.get(nKey));
         }
 
-        System.out.println(hm.size());
     }
 }
