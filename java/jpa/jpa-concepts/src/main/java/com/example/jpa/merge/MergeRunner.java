@@ -7,10 +7,12 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.jpa.merge.entities.MergeMember;
+
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@Component
+//@Component
 public class MergeRunner implements ApplicationRunner {
 
     private final EntityManager em;
@@ -19,19 +21,21 @@ public class MergeRunner implements ApplicationRunner {
     @Transactional
     @Override
     public void run(ApplicationArguments args) throws Exception {
-        // merge는 비영속 엔티티도 저장하기에 persist와 같은 insert 쿼리문이 나간다!
-        final Member member2 = Member.createMember();
-        em.merge(member2);
+        System.out.println("============= Merge Runner Started =============");
 
-        /*Member member = Member.createMember();
+        // merge는 비영속 엔티티도 저장하기에 persist와 같은 insert 쿼리문이 나간다!
+        /*final Member member2 = Member.createMember();
+        em.merge(member2);*/
+
+        MergeMember member = MergeMember.createMember();
         em.persist(member);
         em.flush();
         em.detach(member);
         member.setPassword("test-password");
 
         // merge 메소드 호출하면 먼저 찾아야 되기 때문에 member를 sout으로 출력하기 전에 select 쿼리문이 먼저 나간다
-        // sout 문이 나간 다음에 업데이트 쿼리문이 나간다!
+        // sout 문이 나간 다음에 업데이트 쿼리문이 나간다! 즉, 업데이트 쿼리는 쓰기 지연!
         member = em.merge(member);
-        System.out.println("member = " + member);*/
+        System.out.println("member = " + member);
     }
 }

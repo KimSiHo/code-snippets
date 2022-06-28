@@ -37,8 +37,8 @@ spring:
     hibernate:
       ddl-auto: create
 
-      jdbc:
-        batch_size: 10
+#      jdbc:
+#        batch_size: 10
 
     properties:
       hibernate:

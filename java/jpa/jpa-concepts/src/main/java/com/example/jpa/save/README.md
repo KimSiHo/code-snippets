@@ -1,0 +1,1 @@
+- identity 방식과 sequence 방식의 save 시간 비교
