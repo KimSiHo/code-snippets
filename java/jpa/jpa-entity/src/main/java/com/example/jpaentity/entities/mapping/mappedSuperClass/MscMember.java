@@ -25,7 +25,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "msc_member")
-@Entity
+//@Entity
 public class MscMember extends BaseRegisterDateTimeEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
