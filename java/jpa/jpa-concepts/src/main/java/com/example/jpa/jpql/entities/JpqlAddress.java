@@ -1,4 +1,4 @@
-package com.example.jpaentity.entities.value.entities;
+package com.example.jpa.jpql.entities;
 
 import java.util.Objects;
 
@@ -15,16 +15,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Embeddable
-public class Address {
+public class JpqlAddress {
     private String city;
     private String street;
-    @Column(length = 5)
+    @Column
     private String zipcode;
 
-    // 엔티티에 대한 참조도 가질 수 있다!
-    /*private ValueMember member;*/
-
-    // 이렇게 연관 있는 메소드를 만들고 @Column 정의를 해서 응집도를 높일 수 있다
     public boolean isValid() {
         return true;
     }
@@ -41,8 +37,8 @@ public class Address {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Address address = (Address) o;
-        return Objects.equals(getCity(), address.getCity()) && Objects.equals(getStreet(), address.getStreet()) && Objects.equals(getZipcode(), address.getZipcode());
+        JpqlAddress jpqlAddress = (JpqlAddress) o;
+        return Objects.equals(getCity(), jpqlAddress.getCity()) && Objects.equals(getStreet(), jpqlAddress.getStreet()) && Objects.equals(getZipcode(), jpqlAddress.getZipcode());
     }
 
     @Override

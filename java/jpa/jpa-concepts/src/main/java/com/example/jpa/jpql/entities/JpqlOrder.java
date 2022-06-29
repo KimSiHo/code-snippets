@@ -1,12 +1,14 @@
-package com.example.jpa.proxy.entities;
-
-import java.time.LocalDateTime;
+package com.example.jpa.jpql.entities;
 
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AccessLevel;
@@ -21,24 +23,21 @@ import lombok.Setter;
 @Builder
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-//@Entity
-@Table(name = "proxy_member")
-public class ProxyMember {
+@Table(name = "jpql_order")
+@Entity
+public class JpqlOrder {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "member_no")
-    private Long memberNo;
+    @Column(name = "order_id")
+    private Long id;
 
-    @Column
-    private String password;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_no")
+    private JpqlMember member;
 
-    @Column
-    private LocalDateTime lastPasswordChangeDate;
+    @Embedded
+    private JpqlAddress address;
 
-    public static ProxyMember createMember() {
-        return ProxyMember.builder()
-                .password("password")
-                .lastPasswordChangeDate(LocalDateTime.now())
-                .build();
-    }
+
+
 }

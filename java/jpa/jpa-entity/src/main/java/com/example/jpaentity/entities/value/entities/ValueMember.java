@@ -32,7 +32,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "value_member")
-@Entity
+//@Entity
 public class ValueMember {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
@@ -61,11 +61,17 @@ public class ValueMember {
     // 값 타입 같은 경우 @Column 매핑을 하지 않아도, 해당 값 타입의 필드로 테이블 컬럼이 생성
     // Set<String>과 같이 칼럼이 딱 하나인 경우는 예외적으로 @Column 매핑으로 매핑할 칼럼명을 적어줄 수 있다
     // 값 타입 컬렉션은 영속성 전이 + 고아 객체 제거 기능을 필수로 가진다고 볼 수 있다
+    // 값 타입은 본인 스스로의 라이프 사이클이 없다, 생명 주기가 엔티티에 소속된다
+    // 엔티티에 속하는 멤버 변수는 값만 바뀌면 자동으로 업데이트 쿼리문이 나가듯이, 값 타입 컬렉션도 값을 바꾸면 별도로 없데이트 할 필요가 없다
+    // 값 타입 컬렉션에서 값을 변경할 때는 삭제하고 다시 집어넣는 식으로 해야 한다
+    @Builder.Default
     @ElementCollection
     @CollectionTable(name = "FAVORITE_FOOD", joinColumns = @JoinColumn(name = "member_no"))
     @Column(name = "FOOD_NAME")
     private Set<String> favoriteFoods = new HashSet<>();
 
+    // 값 타입 컬렉션을 매핑하는 테이블은 모든 컬럼을 묶어서 기본키를 구성해야 함 : null 입력 X, 중복 저장 X
+    @Builder.Default
     @ElementCollection
     @CollectionTable(name = "ADDRESS", joinColumns = @JoinColumn(name = "member_no"))
     private List<Address> addressHistory = new ArrayList<>();
