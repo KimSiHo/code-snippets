@@ -35,9 +35,10 @@ public class JpqlOrder {
     @JoinColumn(name = "member_no")
     private JpqlMember member;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id")
+    private JpqlProduct product;
+
     @Embedded
     private JpqlAddress address;
-
-
-
 }

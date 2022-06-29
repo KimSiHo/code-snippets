@@ -1,13 +1,13 @@
 server.port: 9090
 
-#logging:
-#  level:
-#    root: info
-#    com.zaxxer.hikari.pool.HikariPool: debug
-#    org.springframework.web: info
-#    org.hibernate.SQL: debug
-#    org.hibernate.type.descriptor.sql: trace
-#
+logging:
+ level:
+   root: info
+   com.zaxxer.hikari.pool.HikariPool: debug
+   org.springframework.web: info
+   org.hibernate.SQL: debug
+   org.hibernate.type.descriptor.sql: trace
+
 #spring:
 #  datasource:
 #    type: com.zaxxer.hikari.HikariDataSource

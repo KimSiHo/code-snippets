@@ -26,19 +26,15 @@ import lombok.Setter;
 public class JpqlProduct {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "member_no")
-    private Long memberNo;
+    @Column(name = "product_id")
+    private Long productId;
 
     @Column
     private String name;
 
     @Column
-    private LocalDateTime lastPasswordChangeDate;
+    private int price;
 
-    public static JpqlProduct createMember(String name) {
-        return JpqlProduct.builder()
-                .name(name)
-                .lastPasswordChangeDate(LocalDateTime.now())
-                .build();
-    }
+    @Column
+    private int stockAmount;
 }

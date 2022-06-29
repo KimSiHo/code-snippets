@@ -1,15 +1,16 @@
 package com.example.jpa.jpql.entities;
 
-import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AccessLevel;
@@ -25,27 +26,23 @@ import lombok.Setter;
 @AllArgsConstructor(access = AccessLevel.PROTECTED)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
-@Table(name = "jpql_member")
-public class JpqlMember {
+@Table(name = "jpql_team")
+public class JpqlTeam {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "member_no")
-    private Long memberNo;
+    @Column(name = "team_id")
+    private Long teamId;
 
     @Column
     private String name;
 
-    @Column
-    private int age;
+    @Builder.Default
+    @OneToMany(mappedBy = "team")
+    private List<JpqlMember> members = new ArrayList<>();
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "team_id")
-    private JpqlTeam team;
-
-
-    public static JpqlMember createMember(String name) {
-        return JpqlMember.builder()
-                .name(name)
-                .build();
+    public static JpqlTeam create(String name) {
+        return JpqlTeam.builder()
+            .name(name)
+            .build();
     }
 }
