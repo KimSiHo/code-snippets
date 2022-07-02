@@ -1,15 +1,14 @@
-package com.example.jpa.save;
+package com.example.jpa.various_concepts.save;
 
 import javax.persistence.EntityManager;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
-import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StopWatch;
 
-import com.example.jpa.save.entities.IdentityMember;
-import com.example.jpa.save.entities.SequenceMember;
+import com.example.jpa.various_concepts.save.entities.IdentityMember;
+import com.example.jpa.various_concepts.save.entities.SequenceMember;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

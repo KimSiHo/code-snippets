@@ -1,11 +1,12 @@
 package me.bigmonkey.datasource.repository;
 
-import hello.jdbc.domain.Member;
-import lombok.extern.slf4j.Slf4j;
+import javax.sql.DataSource;
+
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 
-import javax.sql.DataSource;
+import lombok.extern.slf4j.Slf4j;
+import me.bigmonkey.datasource.domain.Member;
 
 /**
  * JdbcTemplate 사용
@@ -52,5 +53,4 @@ public class MemberRepositoryV5 implements MemberRepository {
             return member;
         };
     }
-
 }

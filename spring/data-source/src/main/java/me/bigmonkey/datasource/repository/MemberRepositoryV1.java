@@ -1,13 +1,18 @@
 package me.bigmonkey.datasource.repository;
 
-import hello.jdbc.connection.DBConnectionUtil;
-import hello.jdbc.domain.Member;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.jdbc.support.JdbcUtils;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.NoSuchElementException;
 
 import javax.sql.DataSource;
-import java.sql.*;
-import java.util.NoSuchElementException;
+
+import org.springframework.jdbc.support.JdbcUtils;
+
+import lombok.extern.slf4j.Slf4j;
+import me.bigmonkey.datasource.domain.Member;
 
 /**
  * JDBC - DataSource 사용, JdbcUtils 사용
@@ -40,7 +45,18 @@ public class MemberRepositoryV1 {
         } finally {
             close(con, pstmt, null);
         }
+    }
 
+    private Connection getConnection() throws SQLException {
+        Connection con = dataSource.getConnection();
+        log.info("get connection={}, class={}", con, con.getClass());
+        return con;
+    }
+
+    private void close(Connection con, Statement stmt, ResultSet rs) {
+        JdbcUtils.closeResultSet(rs);
+        JdbcUtils.closeStatement(stmt);
+        JdbcUtils.closeConnection(con);
     }
 
     public Member findById(String memberId) throws SQLException {
@@ -64,16 +80,13 @@ public class MemberRepositoryV1 {
             } else {
                 throw new NoSuchElementException("member not found memberId=" + memberId);
             }
-
         } catch (SQLException e) {
             log.error("db error", e);
             throw e;
         } finally {
             close(con, pstmt, rs);
         }
-
     }
-
 
     public void update(String memberId, int money) throws SQLException {
         String sql = "update member set money=? where member_id=?";
@@ -94,9 +107,7 @@ public class MemberRepositoryV1 {
         } finally {
             close(con, pstmt, null);
         }
-
     }
-
 
     public void delete(String memberId) throws SQLException {
         String sql = "delete from member where member_id=?";
@@ -115,21 +126,5 @@ public class MemberRepositoryV1 {
         } finally {
             close(con, pstmt, null);
         }
-
     }
-
-    private void close(Connection con, Statement stmt, ResultSet rs) {
-        JdbcUtils.closeResultSet(rs);
-        JdbcUtils.closeStatement(stmt);
-        JdbcUtils.closeConnection(con);
-    }
-
-
-    private Connection getConnection() throws SQLException {
-        Connection con = dataSource.getConnection();
-        log.info("get connection={}, class={}", con, con.getClass());
-        return con;
-    }
-
-
 }

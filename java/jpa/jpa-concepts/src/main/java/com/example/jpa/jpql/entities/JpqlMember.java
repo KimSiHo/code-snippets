@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 import lombok.AccessLevel;
@@ -26,6 +27,10 @@ import lombok.Setter;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 @Table(name = "jpql_member")
+// em.createNamedQuery를 사용해서 사용할 수 있다
+@NamedQuery(
+    name = "Member.findByUsername",
+    query = "select m from Member m where m.username =: username")
 public class JpqlMember {
 
     @Id @GeneratedValue(strategy = GenerationType.AUTO)

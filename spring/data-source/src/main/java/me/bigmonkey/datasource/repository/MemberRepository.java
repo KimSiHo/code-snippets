@@ -1,8 +1,9 @@
 package me.bigmonkey.datasource.repository;
 
-import hello.jdbc.domain.Member;
+import me.bigmonkey.datasource.domain.Member;
 
 public interface MemberRepository {
+
     Member save(Member member);
 
     Member findById(String memberId);
@@ -10,5 +11,4 @@ public interface MemberRepository {
     void update(String memberId, int money);
 
     void delete(String memberId);
-
 }

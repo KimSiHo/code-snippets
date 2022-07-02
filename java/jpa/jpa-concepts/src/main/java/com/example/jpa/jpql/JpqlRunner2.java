@@ -1,11 +1,6 @@
 package com.example.jpa.jpql;
 
-import java.util.List;
-
 import javax.persistence.EntityManager;
-import javax.persistence.Query;
-import javax.persistence.TypedQuery;
-import javax.swing.JMenu;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -132,6 +127,32 @@ public class JpqlRunner2 implements ApplicationRunner {
             .getResultList();
 
         System.out.println("resultList = " + resultList.size());*/
+
+        // 이렇게 하면 페이징 API를 호출하긴 하지만, 팀의 members 컬렉션을 사용할 때마다 조회 쿼리가 나간다
+        // 이 문제를 해결하기위해 team의 members 필드에 @BatchSize 어노테이션으로 100이하의 값을 준다, 그러면 in 쿼리를 사용해서 추가 한번의 쿼리로 다 가져온다
+       /* String query = "select t From JpqlTeam t";
+        List<JpqlTeam> resultList = em.createQuery(query, JpqlTeam.class)
+            .setFirstResult(0)
+            .setMaxResults(2)
+            .getResultList();
+
+        System.out.println("result = " + resultList.size());
+
+        for (JpqlTeam jpqlTeam : resultList) {
+            System.out.println("team =" + jpqlTeam.getName() + "| jpqlMembers = " + jpqlTeam.getMembers());
+            for (JpqlMember member : jpqlTeam.getMembers()) {
+                System.out.println("-> member = " + member);
+            }
+        }*/
+
+        /*// Type은 조회 대상을 특정 자식으로 한정
+        String sql = "select i from Item i where type(i) IN (Book, Movie)";
+        // sql은 이렇게 나간다 select i from i where i.DTYPE in('B', 'M')
+        String sql = "select i from Item i where treat(i as Book).author = 'kim'";
+        // sql은 이렇게 나간다 select i.* from Item i where i.DTYPE = 'B' and i.author = 'kim'
+        // 아이템에는 author가 없고 book에 author 가 있으니가 다운 캐스팅을 하는 것이다, 싱글 테이블은 SQL 이렇게 나가고 다른 전략은 다르게 쿼리가 나간다*/
+
+
     }
 
     private void init() {

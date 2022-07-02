@@ -13,6 +13,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.BatchSize;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,6 +38,7 @@ public class JpqlTeam {
     @Column
     private String name;
 
+    @BatchSize(size = 100)
     @Builder.Default
     @OneToMany(mappedBy = "team")
     private List<JpqlMember> members = new ArrayList<>();
