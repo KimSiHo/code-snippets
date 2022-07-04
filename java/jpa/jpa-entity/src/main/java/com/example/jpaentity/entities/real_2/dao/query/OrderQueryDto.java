@@ -1,4 +1,4 @@
-package com.example.jpaentity.entities.real_2.dao;
+package com.example.jpaentity.entities.real_2.dao.query;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -28,8 +28,7 @@ public class OrderQueryDto {
         this.address = address;
     }
 
-    public OrderQueryDto(Long orderId, String name, LocalDateTime orderDate, OrderStatus orderStatus, Real2Address address,
-        List<OrderItemQueryDto> orderItems) {
+    public OrderQueryDto(Long orderId, String name, LocalDateTime orderDate, OrderStatus orderStatus, Real2Address address, List<OrderItemQueryDto> orderItems) {
         this.orderId = orderId;
         this.name = name;
         this.orderDate = orderDate;

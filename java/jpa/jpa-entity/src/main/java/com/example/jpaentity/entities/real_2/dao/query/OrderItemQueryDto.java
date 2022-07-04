@@ -1,4 +1,4 @@
-package com.example.jpaentity.entities.real_2.dao;
+package com.example.jpaentity.entities.real_2.dao.query;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

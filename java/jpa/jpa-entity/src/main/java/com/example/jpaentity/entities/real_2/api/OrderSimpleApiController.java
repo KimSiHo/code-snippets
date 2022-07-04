@@ -79,11 +79,17 @@ public class OrderSimpleApiController {
         return result;
     }
 
+    // 네트워크 전송량이 줄어들어서 성능은 증가하기 하지만 v3은 다양한 로직에서 사용할 수 있는 반면 v4는 원하는 필드를 특정하게 선택해서
+    // 직접 sql을 짜는 것과 같이 동작해 재사용성이 떨어진다는 단점이 있다
+    // 네트워크 용량을 최적화하긴 하지만 생각보다 성능 차이가 미비하다, 리포지토리 재사용성 떨어짐, API 스펙에 맞춘 코드가 리포지토리에 들어가는 단점
+    // 물리적으로는 로직과 db 접근 기술이 분리되어 있지만 논리적으로는 결합되어 있다, api 스펙이 리포지토리 쿼리문에 들어가므로
+    // 대부분의 성능 문제는 from절과 where절 인덱스 여부에 따라 성능 차이가 나므로 select 절 최적화는 크게 영향이 없다
+    // select 절에서 가져오는 데이터 용량이 큰 경우를 제외하고는 select 절 최적화를 하지말고 그냥 가져오는 것이 유지보수성과 확장성에 좋다!
+    // select절 최적화 하는 경우 해당 코드는 별도의 respository를 만들어서 사용하는 것이 유지보수성에 좋다!
     @GetMapping("/api/v4/simple-orders")
     public List<OrderSimpleQueryDto> ordersV4() {
         return orderSimpleQueryRepository.findOrderDtos();
     }
-
 
     @Data
     static class SimpleOrderDto {
