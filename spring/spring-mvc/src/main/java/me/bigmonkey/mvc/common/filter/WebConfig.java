@@ -1,5 +1,6 @@
 package me.bigmonkey.mvc.common.filter;
 
+import javax.servlet.DispatcherType;
 import javax.servlet.Filter;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -32,4 +33,16 @@ public class WebConfig {
 
         return filterRegistrationBean;
     }
+
+    // dispatcherType은 기본값이 request이다, 즉 클라이언트의 요청이 있는 경우에만 필터가 적용된다
+    // 특별히 오류 페이지 경로도 필터를 적용할 것이 아니면, 기본 값을 그대로 사용하면 된다
+    //@Bean
+    /*public FilterRegistrationBean logFilter() {
+        FilterRegistrationBean<Filter> filterRegistrationBean = new FilterRegistrationBean<>();
+        filterRegistrationBean.setFilter(new LogFilter());
+        filterRegistrationBean.setOrder(1);
+        filterRegistrationBean.addUrlPatterns("/*");
+        filterRegistrationBean.setDispatcherTypes(DispatcherType.REQUEST, DispatcherType.ERROR);
+        return filterRegistrationBean;
+    }*/
 }

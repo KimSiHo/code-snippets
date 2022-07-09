@@ -34,6 +34,4 @@ public class ErrorController {
 
     // 서블릿 컨테이너는 정리하면 예외가 발생하면 500, sendError를 호출하면 그에 맞는 코드를 설정해서 WAS 기본 오류 페이지 호출
 
-
-
 }

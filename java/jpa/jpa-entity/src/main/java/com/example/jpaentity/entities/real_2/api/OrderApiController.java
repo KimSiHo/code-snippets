@@ -118,20 +118,27 @@ public class OrderApiController {
     }
 
     // toMany 조회가 있을 때 dto 로 변환하는 방법
+    // 1+N, 단건 조회일 경우 사용
     @GetMapping("/api/v4/orders")
     public List<OrderQueryDto> ordersV4() {
         return orderQueryRepository.findOrderQueryDtos();
     }
 
+    // 여러 건 조회일 경우 사용, 1+1
     @GetMapping("/api/v5/orders")
     public List<OrderQueryDto> ordersV5() {
         return orderQueryRepository.findAllByDto_optimization();
     }
 
+    // 여러 건 조회일 경우 사용, 1
+    // db에서 한 방에 조인 문으로 가져온다음 어플리케이션 상에서 조작
+    // 단점은 쿼리는 한번이지만 조인으로 인해 DB에서 전달하는 중복 데이터로 v5보다 더 느릴 수도 있다
+    // 애플리케이션에서 추가 작업이 크고 페이징 불가능 (order 기준으로 페이징 안됨!)
     @GetMapping("/api/v6/orders")
     public List<OrderQueryDto> ordersV6() {
         List<OrderFlatDto> flats = orderQueryRepository.findAllByDto_flat();
 
+        // id를 기준으로 묶게 @EqualsAndHashCode를 구현해야 한다
         return flats.stream()
             .collect(groupingBy(o -> new OrderQueryDto(o.getOrderId(), o.getName(), o.getOrderDate(), o.getOrderStatus(), o.getAddress()),
                 mapping(o -> new OrderItemQueryDto(o.getOrderId(), o.getItemName(), o.getOrderPrice(), o.getCount()), toList())

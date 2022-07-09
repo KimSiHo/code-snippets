@@ -62,6 +62,8 @@ public class OrderQueryRepository {
      * 데이터를 한꺼번에 처리할 때 많이 사용하는 방식
      *
      */
+    // ㅋㅋ 내가 사용하던 방법. 신기하네 ㅋㅋ. id 리스트로 뽑은 다음 in 쿼리 그리고 pk로 map 으로 매핑
+    // 총 쿼리 2번 나감 1+1
     public List<OrderQueryDto> findAllByDto_optimization() {
 
         //루트 조회(toOne 코드를 모두 한번에 조회)
