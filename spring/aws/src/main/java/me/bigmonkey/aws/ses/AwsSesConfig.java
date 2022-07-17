@@ -13,17 +13,16 @@ import com.amazonaws.services.simpleemail.AmazonSimpleEmailServiceClientBuilder;
 @Configuration
 public class AwsSesConfig {
 
-    @Value("${aws.ses.access-key}")
+    @Value("${cloud.aws.credentials.access-key}")
     private String accessKey;
 
-    @Value("${aws.ses.secret-key}")
+    @Value("${cloud.aws.credentials.secret-key}")
     private String secretKey;
 
     @Bean
     public AmazonSimpleEmailService amazonSimpleEmailService() {
         final BasicAWSCredentials basicAWSCredentials = new BasicAWSCredentials(accessKey, secretKey);
-        final AWSStaticCredentialsProvider awsStaticCredentialsProvider = new AWSStaticCredentialsProvider(
-            basicAWSCredentials);
+        final AWSStaticCredentialsProvider awsStaticCredentialsProvider = new AWSStaticCredentialsProvider(basicAWSCredentials);
 
         return AmazonSimpleEmailServiceClientBuilder.standard()
             .withCredentials(awsStaticCredentialsProvider)

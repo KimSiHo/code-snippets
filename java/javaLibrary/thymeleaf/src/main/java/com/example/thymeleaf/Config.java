@@ -7,7 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.thymeleaf.spring5.templateresolver.SpringResourceTemplateResolver;
 import org.thymeleaf.templatemode.TemplateMode;
 
-@Configuration
+//@Configuration
 public class Config {
 
     private static final String MAIL_ENCODING = StandardCharsets.UTF_8.name();
