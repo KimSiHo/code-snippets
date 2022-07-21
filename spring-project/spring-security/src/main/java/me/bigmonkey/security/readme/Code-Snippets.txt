@@ -1,0 +1,4 @@
+SecurityContextHolder.getContext().getAuthentication()
+# 해당 구문을 통해 전역적으로 인증 객체를 참조 가능
+# 해당 코드는 어디에선든지 작성 가능
+
