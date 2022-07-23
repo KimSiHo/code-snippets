@@ -10,12 +10,21 @@ import org.springframework.web.server.ResponseStatusException;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
-import me.bigmonkey.mvc.common.apiException.UserException;
 import me.bigmonkey.mvc.common.apiException.BadRequestException;
+import me.bigmonkey.mvc.common.apiException.UserException;
 
 @Slf4j
 @RestController
 public class ApiExceptionController {
+
+    // 스프링 부트는 이런 과정을 모두 기본으로 제공 > (ErrorPage를 자동으로 등록, 이때 /error 라는 경로로 기본 오류 페이지를 설정)
+    // 상태 코드와 예외를 설정하지 않으면 기본 오류 페이지로 사용, 서블릿 밖으로 예외가 발생하거나, response.sendError가 호출되면 모든 오류는 /error를
+    // 호출하게 된다
+    // BasicErrorController라는 스프링 컨트롤러를 자동으로 등록 > ErrorPage에서 등록한 /error를 매핑해서 처리하는 컨트롤러 (ErrorMvcAutoConfiguration)
+
+    // basiceErrorController는 기본적인 로직이 모두 개발되어 있음, 개발자는 오류 페이지 화면만 BasicErrorController가 제공하는 룰과 우선순위에 따라 등록하면 된다
+    // basicErrorController는 몇몇 정보를 model에 담아서 뷰에 전달. 뷰 템플릿은 이 값을 활용해서 출력할 수 있다
+
 
     // api 예외 처리도 스프링 부트가 제공하는 BasicErrorController 를 사용할 수 있다
 
@@ -58,7 +67,8 @@ public class ApiExceptionController {
         throw new BadRequestException();
     }
 
-    // 내가 변경할 수 없는 라이브러리 예외일때
+    // 내가 변경할 수 없는 라이브러리 예외일때, 그리고 어노테이션과 다르게 코드로 동적으로 바꿀 수 있다
+    // 이것도 ResponseStatusExceptionResolver에서 처리한다
     @GetMapping("/api/response-status-ex2")
     public String responseStatusEx2() {
         throw new ResponseStatusException(HttpStatus.NOT_FOUND, "error.bad", new IllegalArgumentException());

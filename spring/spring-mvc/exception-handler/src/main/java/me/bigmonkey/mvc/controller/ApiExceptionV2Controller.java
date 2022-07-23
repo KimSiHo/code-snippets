@@ -29,7 +29,7 @@ public class ApiExceptionV2Controller {
     }
 
     // 이렇게 할 수도 있다, ExceptionHandler 어노테이션 value는 생략해도 된다, 그러면 메서드 파라미터의 예외가 지정
-   @ExceptionHandler
+    @ExceptionHandler
     public ResponseEntity<ErrorResult> userExHandler(UserException e) {
         log.error("[exceptionHandler] ex", e);
         ErrorResult errorResult = new ErrorResult("USER-EX", e.getMessage());

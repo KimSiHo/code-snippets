@@ -14,6 +14,7 @@ import me.bigmonkey.datasource.domain.Member;
 @Slf4j
 public class MemberRepositoryV5 implements MemberRepository {
 
+    // 트랜잭션 동기화 매니저랑, 예외 변환기 안에서 내부적으로 사용
     private final JdbcTemplate template;
 
     public MemberRepositoryV5(DataSource dataSource) {

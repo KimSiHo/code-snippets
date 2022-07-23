@@ -19,7 +19,8 @@ public class ConverterHelloController {
         return "ok";
     }
 
-    @GetMapping("/hello-v2")
+    // 컨버터 로그를 통해 확인할 수 있다다
+   @GetMapping("/hello-v2")
     public String helloV2(@RequestParam Integer data) {
         System.out.println("data = " + data);
         return "ok";
