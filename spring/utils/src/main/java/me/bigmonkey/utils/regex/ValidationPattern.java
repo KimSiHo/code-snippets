@@ -12,5 +12,4 @@ public interface ValidationPattern {
     public static final String MASKING_EMAIL = "\\b(\\S+)[^@][^@][^@]+@(\\S+)";
     public static final String MASKING_EMAIL_MIN = "\\b[^@]+@(\\S+)";
     public static final String MASKING_EMAIL_N = "([\\\\w.])(?:[\\\\w.]*)(@.*)";
-
 }

@@ -11,14 +11,14 @@ import lombok.RequiredArgsConstructor;
 @Service
 public class BoardService {
 
-  private final BoardRepository repository;
-  
-  @Cacheable(key = "#size", value = "getBoards")
-  public List<Board> getBoards(String size) {
-    return repository.createBySize(size);
-  }
-  
-  public static int getDbCount() {
-    return BoardRepository.getDbCount();
-  }
+    private final BoardRepository repository;
+
+    @Cacheable(key = "#size", value = "getBoards")
+    public List<Board> getBoards(String size) {
+        return repository.createBySize(size);
+    }
+
+    public static int getDbCount() {
+        return BoardRepository.getDbCount();
+    }
 }

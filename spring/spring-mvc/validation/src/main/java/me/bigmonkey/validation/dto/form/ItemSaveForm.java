@@ -1,6 +1,7 @@
 package me.bigmonkey.validation.dto.form;
 
 import lombok.Data;
+
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.Max;

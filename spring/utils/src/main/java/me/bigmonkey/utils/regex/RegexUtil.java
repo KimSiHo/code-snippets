@@ -33,7 +33,7 @@ public class RegexUtil {
             String target = matcher.group(1);
             int length = target.length();
 
-            if(length > 3) {
+            if (length > 3) {
                 char[] c = new char[3];
                 Arrays.fill(c, '*');
                 return email.replace(target, target.substring(0, length - 3) + String.valueOf(c));
@@ -46,5 +46,4 @@ public class RegexUtil {
 
         return email;
     }
-
 }

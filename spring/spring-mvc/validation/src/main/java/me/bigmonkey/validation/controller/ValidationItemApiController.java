@@ -33,7 +33,6 @@ public class ValidationItemApiController {
         return form;
     }
 
-
     // @ModelAttribute vs @RequestBody
     // @ModelAttribute 는 필드 단위로 정교하게 바인딩이 적용. 특정 필드가 바인딩 되지 않아도 나머지 필드는 정상 바인딩 되고, Validator를 사용한 검증도 적용 가능
     // @RequestBody는 HttpMessageConverter 단계에서 JSON 데이터를 객체로 변경하지 못하면 이후 단계 자체가 진행않고 예외가 발생.

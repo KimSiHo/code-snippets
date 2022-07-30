@@ -88,7 +88,8 @@ public class BeanValidationController {
     // 따라서 오브젝트 오류(글로벌 오류)의 경우 해당 기능을 사용하기 보다는 직접 자바 코드로 작성하는 것을 권장
 
     //@PostMapping("/v2/items/add")
-    public String addItemV1(@Validated @ModelAttribute ItemBean item, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+    public String addItemV1(@Validated @ModelAttribute ItemBean item, BindingResult bindingResult, RedirectAttributes redirectAttributes,
+        Model model) {
         //검증에 실패하면 다시 입력 폼으로
         if (bindingResult.hasErrors()) {
             log.info("errors={} ", bindingResult);
@@ -108,7 +109,8 @@ public class BeanValidationController {
     // 따라서 복잡한 폼의 데이터를 컨트롤러까지 전달할 별도의 객체를 만들고 이것을 통해 이후 컨트롤러에서 필요한 데이터를 사용해서 도메인 객체를 생성
     // 따라서 이렇게 폼 데이터 전달을 위한 별도의 객체를 사용하고, 등록, 수정용 폼 객체를 나누면 등록, 수정이 완전히 분리되기에 groups를 적용할 일은 드물다
     //@PostMapping("/v2/items/add")
-    public String addItemV2(@Validated(SaveCheck.class) @ModelAttribute ItemBean item, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
+    public String addItemV2(@Validated(SaveCheck.class) @ModelAttribute ItemBean item, BindingResult bindingResult,
+        RedirectAttributes redirectAttributes, Model model) {
         //검증에 실패하면 다시 입력 폼으로
         if (bindingResult.hasErrors()) {
             log.info("errors={} ", bindingResult);
@@ -123,7 +125,8 @@ public class BeanValidationController {
     }
 
     @PostMapping("/v2/items/add")
-    public String addItemV3(@Validated @ModelAttribute("item") ItemSaveForm form, BindingResult bindingResult, RedirectAttributes redirectAttributes) {
+    public String addItemV3(@Validated @ModelAttribute("item") ItemSaveForm form, BindingResult bindingResult,
+        RedirectAttributes redirectAttributes) {
 
         //특정 필드가 아닌 복합 룰 검증
         if (form.getPrice() != null && form.getQuantity() != null) {

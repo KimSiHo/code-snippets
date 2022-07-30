@@ -20,31 +20,31 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 public class AwsS3Service {
 
-  private final AmazonS3Client amazonS3Client;
+    private final AmazonS3Client amazonS3Client;
 
-  @Value("${cloud.aws.s3.bucket}")
-  private String bucketName;
+    @Value("${cloud.aws.s3.bucket}")
+    private String bucketName;
 
-  public String uploadFileV1(String category, MultipartFile multipartFile) {
-    validateFileExists(multipartFile);
+    public String uploadFileV1(String category, MultipartFile multipartFile) {
+        validateFileExists(multipartFile);
 
-    String fileName = CommonUtils.buildFileName(category, multipartFile.getOriginalFilename());
+        String fileName = CommonUtils.buildFileName(category, multipartFile.getOriginalFilename());
 
-    ObjectMetadata objectMetadata = new ObjectMetadata();
-    objectMetadata.setContentType(multipartFile.getContentType());
+        ObjectMetadata objectMetadata = new ObjectMetadata();
+        objectMetadata.setContentType(multipartFile.getContentType());
 
-    try (InputStream inputStream = multipartFile.getInputStream()) {
-      amazonS3Client.putObject(new PutObjectRequest(bucketName, fileName, inputStream, objectMetadata));
-    } catch (IOException e) {
-      throw new FileUploadFailedException("파일 업로드 실패", e);
+        try (InputStream inputStream = multipartFile.getInputStream()) {
+            amazonS3Client.putObject(new PutObjectRequest(bucketName, fileName, inputStream, objectMetadata));
+        } catch (IOException e) {
+            throw new FileUploadFailedException("파일 업로드 실패", e);
+        }
+
+        return amazonS3Client.getUrl(bucketName, fileName).toString();
     }
 
-    return amazonS3Client.getUrl(bucketName, fileName).toString();
-  }
-
-  private void validateFileExists(MultipartFile multipartFile) {
-    if (multipartFile.isEmpty()) {
-      throw new EmptyFileException("빈 파일 에러");
+    private void validateFileExists(MultipartFile multipartFile) {
+        if (multipartFile.isEmpty()) {
+            throw new EmptyFileException("빈 파일 에러");
+        }
     }
-  }
 }

@@ -19,20 +19,19 @@ public class SendEmailService {
 
     public void send(final String subject, final String content, final List<String> receivers) {
         final EmailSenderDto senderDto = EmailSenderDto.builder()
-          .to(receivers)
-          .subject(subject)
-          .content(content)
-          .build();
+            .to(receivers)
+            .subject(subject)
+            .content(content)
+            .build();
 
         final SendEmailResult sendEmailResult = amazonSimpleEmailService.sendEmail(senderDto.toSendRequestDto());
 
         sendingResultMustSuccess(sendEmailResult);
     }
 
-  private void sendingResultMustSuccess(final SendEmailResult sendEmailResult) {
-    if (sendEmailResult.getSdkHttpMetadata().getHttpStatusCode() != 200) {
-      log.error("{}", sendEmailResult.getSdkResponseMetadata().toString());
+    private void sendingResultMustSuccess(final SendEmailResult sendEmailResult) {
+        if (sendEmailResult.getSdkHttpMetadata().getHttpStatusCode() != 200) {
+            log.error("{}", sendEmailResult.getSdkResponseMetadata().toString());
+        }
     }
-  }
-
 }

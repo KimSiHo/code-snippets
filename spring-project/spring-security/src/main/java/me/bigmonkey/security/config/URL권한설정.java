@@ -23,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @Configuration
-@EnableWebSecurity
+//@EnableWebSecurity
 public class URL권한설정 extends WebSecurityConfigurerAdapter {
 
     private final UserDetailsService userDetailsService;

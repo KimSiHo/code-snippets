@@ -47,7 +47,5 @@ public class StringTest implements ApplicationRunner {
         String s = StringUtils.trimAllWhitespace(test8);
         System.out.println(s + ", " + s.length());
         System.out.println(StringUtils.trimAllWhitespace(test9));
-
-
     }
 }

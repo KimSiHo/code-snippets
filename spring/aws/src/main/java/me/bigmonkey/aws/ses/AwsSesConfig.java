@@ -3,6 +3,7 @@ package me.bigmonkey.aws.ses;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 import com.amazonaws.regions.Regions;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;

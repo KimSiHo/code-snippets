@@ -32,6 +32,7 @@ public class ExHandler {
     @Builder
     @Data
     public static class ErrorResponse {
+
         Integer errorCode;
 
         public static ErrorResponse of(Integer errorCode) {

@@ -11,18 +11,16 @@ import lombok.RequiredArgsConstructor;
 @RestController
 public class BoardController {
 
-  private final BoardService service;
-  
-  
-  @GetMapping()
-  public List<Board> boards(String size) {
-    List<Board> boards = service.getBoards(size);
-    return boards;
-  }
-  
-  @GetMapping("count")
-  public int count() {
-    return BoardService.getDbCount();
-  }
+    private final BoardService service;
 
+    @GetMapping()
+    public List<Board> boards(String size) {
+        List<Board> boards = service.getBoards(size);
+        return boards;
+    }
+
+    @GetMapping("count")
+    public int count() {
+        return BoardService.getDbCount();
+    }
 }

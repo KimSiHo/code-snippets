@@ -19,18 +19,18 @@ import lombok.RequiredArgsConstructor;
 @Configuration
 public class CacheConfig {
 
-  private final RedisConnectionFactory redisConnectionFactory;
-  private final ObjectMapper objectMapper;
-  private final RedisConnectionFactory connectionFactory;
+    private final RedisConnectionFactory redisConnectionFactory;
+    private final ObjectMapper objectMapper;
+    private final RedisConnectionFactory connectionFactory;
 
-  @Bean
-  public CacheManager redisCacheManager() {
-    RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
-      .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
-      .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));
-    
-    RedisCacheManager redisCacheManager = RedisCacheManager.RedisCacheManagerBuilder.fromConnectionFactory(connectionFactory).cacheDefaults(redisCacheConfiguration).build();
-    return redisCacheManager;
-  }
-  
+    @Bean
+    public CacheManager redisCacheManager() {
+        RedisCacheConfiguration redisCacheConfiguration = RedisCacheConfiguration.defaultCacheConfig()
+            .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(new StringRedisSerializer()))
+            .serializeValuesWith(RedisSerializationContext.SerializationPair.fromSerializer(new GenericJackson2JsonRedisSerializer()));
+
+        RedisCacheManager redisCacheManager = RedisCacheManager.RedisCacheManagerBuilder.fromConnectionFactory(connectionFactory)
+            .cacheDefaults(redisCacheConfiguration).build();
+        return redisCacheManager;
+    }
 }

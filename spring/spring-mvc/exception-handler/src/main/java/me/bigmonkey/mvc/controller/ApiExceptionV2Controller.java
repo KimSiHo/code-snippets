@@ -21,9 +21,9 @@ public class ApiExceptionV2Controller {
     // exceptionHandlerResolver가 해당 메소드를 실행시킨다
     // 예외를 먹어서 정상 흐름으로 가기에 200 코드가 나오고 그것이 맞다. 하지만 상태 코드를 바꾸고 싶으면 ResponseStatus를 사용하면 된다
     // 서블릿 컨테이너까지 요청이 가지 않고 여기서 흐름이 끝나는 것이다!
-   //@ResponseStatus(HttpStatus.BAD_REQUEST)
+    //@ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(IllegalArgumentException.class)
-    public ErrorResult illegalExHandler(IllegalArgumentException e){
+    public ErrorResult illegalExHandler(IllegalArgumentException e) {
         log.error("[exceptionHandler] ex", e);
         return new ErrorResult("BAD", e.getMessage());
     }

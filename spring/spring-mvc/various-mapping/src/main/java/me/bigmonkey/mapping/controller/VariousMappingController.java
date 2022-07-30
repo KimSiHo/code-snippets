@@ -110,7 +110,6 @@ public class VariousMappingController {
     public Object testtest(@RequestParam(name = "format") String format, HttpServletResponse response) {
         Status ok = new Status("OK", null);
 
-
         return ok;
     }
 
@@ -124,6 +123,7 @@ public class VariousMappingController {
 
     @JsonInclude(Include.NON_NULL)
     public static class Status {
+
         String status;
         @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "Asia/Seoul")
         LocalDateTime currentTime;

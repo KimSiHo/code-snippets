@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class RedisCacheNames {
+
     // 키 구분자
     public static final String REDIS_CACHE_KEY_SEPARATOR = ":";
 

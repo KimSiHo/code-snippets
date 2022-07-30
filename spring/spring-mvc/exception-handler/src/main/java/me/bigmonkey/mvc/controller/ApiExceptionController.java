@@ -25,7 +25,6 @@ public class ApiExceptionController {
     // basiceErrorController는 기본적인 로직이 모두 개발되어 있음, 개발자는 오류 페이지 화면만 BasicErrorController가 제공하는 룰과 우선순위에 따라 등록하면 된다
     // basicErrorController는 몇몇 정보를 model에 담아서 뷰에 전달. 뷰 템플릿은 이 값을 활용해서 출력할 수 있다
 
-
     // api 예외 처리도 스프링 부트가 제공하는 BasicErrorController 를 사용할 수 있다
 
     // basicErrorController를 확장하면 JSON 메시지도 변경할 수 있다 (protected 메소드를 오버라이드하면), 그런데 API 오류는 @ExceptionHandler가 제공하는 기능을 사용하는 것이 더 좋다

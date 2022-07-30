@@ -15,7 +15,7 @@
     from t_member m
     left join t_member_info mi on m.member_no = mi.member_no
     where
-        true
+    true
     <if test='firstRegistType != null'>
       and m.first_regist_type = #{firstRegistType}
     </if>
@@ -79,9 +79,9 @@
     resultType="com.etoos.member.admin.dto.response.LegacyServiceLogResponse">
 
     select spl.change_type changeType,
-           spl.before_info,
-           spl.after_info,
-           spl.regist_date regDateTime
+    spl.before_info,
+    spl.after_info,
+    spl.regist_date regDateTime
     from t_service_profile_log spl
     where spl.member_no = #{memberNo} and spl.seq_service_terms_agree = #{seq} and (spl.change_type = 'PFT051' or spl.change_type = 'PFT052')
     order by spl.regist_date desc
@@ -92,17 +92,17 @@
     parameterType="java.lang.Long"
     resultType="com.etoos.member.admin.dto.response.MemberBlockDataResponse">
     select block_type,
-           start_date startDateTime,
-           end_date endDateTime,
-           reason_code,
-           reason,
-           admin_id,
-           regist_date regDateTime,
-           block_state
+    start_date startDateTime,
+    end_date endDateTime,
+    reason_code,
+    reason,
+    admin_id,
+    regist_date regDateTime,
+    block_state
     from
-      t_member_block
+    t_member_block
     where
-      member_no = #{memberNo} and block_type = 'BTC001'
+    member_no = #{memberNo} and block_type = 'BTC001'
     order by regDateTime desc
   </select>
 </mapper>

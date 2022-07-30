@@ -115,7 +115,7 @@ public class ValidationV2Controller {
             bindingResult.addError(new FieldError("item", "price", item.getPrice(), false, null, null, "가격은 1,000 ~ 1,000,000 까지 허용합니다."));
         }
         if (item.getQuantity() == null || item.getQuantity() >= 9999) {
-            bindingResult.addError(new FieldError("item", "quantity", item.getQuantity(), false, null ,null, "수량은 최대 9,999 까지 허용합니다."));
+            bindingResult.addError(new FieldError("item", "quantity", item.getQuantity(), false, null, null, "수량은 최대 9,999 까지 허용합니다."));
         }
 
         //특정 필드가 아닌 복합 룰 검증
@@ -123,7 +123,7 @@ public class ValidationV2Controller {
             int resultPrice = item.getPrice() * item.getQuantity();
             if (resultPrice < 10000) {
                 //오브젝트 에러는 넘어오는 값이 없으므로 저장할 값도 없다
-                bindingResult.addError(new ObjectError("item",null ,null, "가격 * 수량의 합은 10,000원 이상이어야 합니다. 현재 값 = " + resultPrice));
+                bindingResult.addError(new ObjectError("item", null, null, "가격 * 수량의 합은 10,000원 이상이어야 합니다. 현재 값 = " + resultPrice));
             }
         }
 
@@ -149,17 +149,19 @@ public class ValidationV2Controller {
             bindingResult.addError(new FieldError("item", "itemName", item.getItemName(), false, new String[]{"required.item.itemName"}, null, null));
         }
         if (item.getPrice() == null || item.getPrice() < 1000 || item.getPrice() > 1000000) {
-            bindingResult.addError(new FieldError("item", "price", item.getPrice(), false, new String[]{"range.item.price"}, new Object[]{1000, 1000000}, null));
+            bindingResult.addError(
+                new FieldError("item", "price", item.getPrice(), false, new String[]{"range.item.price"}, new Object[]{1000, 1000000}, null));
         }
         if (item.getQuantity() == null || item.getQuantity() >= 9999) {
-            bindingResult.addError(new FieldError("item", "quantity", item.getQuantity(), false, new String[]{"max.item.quantity"} ,new Object[]{9999}, null));
+            bindingResult
+                .addError(new FieldError("item", "quantity", item.getQuantity(), false, new String[]{"max.item.quantity"}, new Object[]{9999}, null));
         }
 
         //특정 필드가 아닌 복합 룰 검증
         if (item.getPrice() != null && item.getQuantity() != null) {
             int resultPrice = item.getPrice() * item.getQuantity();
             if (resultPrice < 10000) {
-                bindingResult.addError(new ObjectError("item",new String[]{"totalPriceMin"} ,new Object[]{10000, resultPrice}, null));
+                bindingResult.addError(new ObjectError("item", new String[]{"totalPriceMin"}, new Object[]{10000, resultPrice}, null));
             }
         }
 
@@ -239,7 +241,6 @@ public class ValidationV2Controller {
     // 총 4가지의 메시지 코드들을 생성해서 BindingResult에 넣어주고 컨트롤러가 호출이 된다
     // 해당 코드들을 정의하지 않으면 디폴트 메시지를 보여주는데 지저분하고 복잡한 메시지가 나온다
 
-
     //@PostMapping("/v2/items/add")
     public String addItemV5(@ModelAttribute Item item, BindingResult bindingResult, RedirectAttributes redirectAttributes, Model model) {
         itemValidator.validate(item, bindingResult);
@@ -262,12 +263,11 @@ public class ValidationV2Controller {
     //webDataBinder는 파라미터 바인딩 해주고, 검증기 가지고 검증도 해주고 스프링 MVC 내부에서 사용하는 기능이다, 이것을 밖으로 꺼내서 안에다가
     //validator를 넣어주어야 된다. 그래야지 webDataBinder가 validator를 적용한다
 
-
     // 컨트롤러가 호출될 때마다 항상 호출된다, 말 그래도 web data 바인딩도하고 검증도 하는 등 MVC 내부에서 동작하는 개념이다
     // dataBinder는 요청이 올 때마다 항상 새로 만들어진다
     // 따라서 어떤 요청으로 흐름이 가더라도 검증기를 적용할 수 있다
     // 이렇게 하면 해당 컨트롤러에만 적용이 된다
-   @InitBinder
+    @InitBinder
     public void init(WebDataBinder dataBinder) {
         dataBinder.addValidators(itemValidator);
     }
@@ -293,8 +293,6 @@ public class ValidationV2Controller {
         redirectAttributes.addAttribute("status", true);
         return "redirect:/validation/v2/items/{itemId}";
     }
-
-
 
     @GetMapping("/v2/items/{itemId}/edit")
     public String editForm(@PathVariable Long itemId, Model model) {

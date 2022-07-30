@@ -2,3 +2,9 @@ SecurityContextHolder.getContext().getAuthentication()
 # 해당 구문을 통해 전역적으로 인증 객체를 참조 가능
 # 해당 코드는 어디에선든지 작성 가능
 
+SecurityContextHolder.getContext().getAuthentication()
+(SecurityContext) session.getAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY)
+# 두 개의 인증 객체는 같은 것이다. 하나는 SCHolder에서 하나는 세션에서.
+
+PasswordEncoderFactories.createDelegatingPasswordEncoder()
+# 여러ㅗ 개의 Password Encoder 유형을 선언한 뒤, 상황에 맞게 선택해서 사용할 수 있도록 지원하는 Encoder이다
