@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="me.bigmoneky.mybatis.dao.mybatis.MemberMapper">
+
+  <select id="getMember" parameterType="java.lang.Long" resultType="me.bigmoneky.mybatis.dto.MemberResponse">
+    select m.member_no,
+        m.regist_date regDate,
+        m.name
+    from t_member m
+  </select>
+
+</mapper>

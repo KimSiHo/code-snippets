@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb
+    username: sa
+    password:
+
+  h2:
+    console:
+      enabled: true
+
+
+
+logging:
+  level:
+    root: info # ?? ?? ??? ?? info ????
+    org.springframework.jdbc: trace
+    org.hibernate: info
+    jdbc.sqlonly: debug
+    jdbc.sqltiming: debug
+    jdbc.audit: debug
+
+    me.bigmoneky.mybatis.dao: trace
+
+mybatis:
+  mapper-locations: classpath:mybatis/**/*.xml
+  type-aliases-package: me.bigmonkey.dto
+  configuration:
+    map-underscore-to-camel-case: true
+
+  type-handlers-package: me.bigmoneky.mybatis.config.mybatis

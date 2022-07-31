@@ -1,0 +1,10 @@
+http-client:
+  connect-timeout: 5s
+  socket-timeout: 5s
+  connect-request-timeout: 5s
+  response-timeout: 5s
+  read-timeout: 5s
+  write-timeout: 5s
+  max-memory-buffer-size: 10MB
+  max-connect: 0
+  max-connect-per-route: 0
