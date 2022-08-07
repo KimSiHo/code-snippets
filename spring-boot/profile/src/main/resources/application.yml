@@ -1,0 +1,8 @@
+
+test.hi: default
+test.default: basic-test
+
+spring.profiles.group:
+  prod:
+    - prod
+    - credentials

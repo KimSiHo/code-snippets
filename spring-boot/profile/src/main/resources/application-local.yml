@@ -1,0 +1,4 @@
+# local 프로파일일때만 해당 파일에 설정된 프로퍼티들을 사용한다
+spring.config.activate.on-profile: local
+
+test.hi: local

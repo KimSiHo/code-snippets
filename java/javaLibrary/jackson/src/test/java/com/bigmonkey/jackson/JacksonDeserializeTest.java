@@ -13,7 +13,8 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import lombok.AllArgsConstructor;
-import lombok.ToString;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @SpringBootTest
 public class JacksonDeserializeTest {
@@ -33,8 +34,7 @@ public class JacksonDeserializeTest {
     public void typeReferenceTest() throws JsonProcessingException {
         String jsonStr = "{\"id\" : 1, \"name\" : \"Anna\"}";
         ObjectMapper objectMapper = new ObjectMapper();
-        Map<String, Object> jsonMap = objectMapper.readValue(jsonStr, new TypeReference<>() {
-        });
+        Map<String, Object> jsonMap = objectMapper.readValue(jsonStr, new TypeReference<>() {});
 
         System.out.println(jsonMap);
     }
@@ -60,21 +60,11 @@ public class JacksonDeserializeTest {
     }
 
     @AllArgsConstructor
-    @ToString
+    @NoArgsConstructor
+    @Data
     public static class Student {
 
         private int id;
         private String name;
-
-        public Student() {
-        }
-
-        public int getId() {
-            return id;
-        }
-
-        public String getName() {
-            return name;
-        }
     }
 }

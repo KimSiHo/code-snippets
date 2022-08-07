@@ -1,0 +1,6 @@
+spring.config.activate.on-profile: prod
+
+test.hi: prod
+test.prod: prod-test
+
+#spring.config.import: classpath:application-credentials.yml
