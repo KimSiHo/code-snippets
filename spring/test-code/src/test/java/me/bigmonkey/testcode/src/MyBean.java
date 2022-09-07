@@ -1,8 +1,8 @@
 package me.bigmonkey.testcode.src;
 
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
-@Component
+@Configuration
 public class MyBean {
 
     public void hello() {

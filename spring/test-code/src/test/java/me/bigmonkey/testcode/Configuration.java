@@ -11,10 +11,12 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.TestConstructor;
 import org.springframework.test.context.TestConstructor.AutowireMode;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import me.bigmonkey.testcode.src.MyBean;
 
 @Slf4j
+@RequiredArgsConstructor
 @TestConstructor(autowireMode = AutowireMode.ALL)
 @SpringBootTest(classes = TestCodeApplication.class)
 public class Configuration {
@@ -26,10 +28,6 @@ public class Configuration {
     @Value("test-dev")
     String hiDev;
 
-    public Configuration(MyBean myBean) {
-        this.myBean = myBean;
-    }
-
     @Test
     void simpleTest() {
         System.out.println("hi");
@@ -40,19 +38,5 @@ public class Configuration {
         myBean.hello();
     }
 
-    // 테스트 코드 실행 시, 스프링 컨테이너에 추가적으로 빈들을 구성
-    @TestConfiguration
-    static class TestConfig {
 
-        @Bean
-        DataSource dataSource() {
-            /*return new DriverManagerDataSource(URL, USERNAME, PASSWORD);*/
-            return null;
-        }
-
-        @Bean
-        MyBean myBean() {
-            return new MyBean();
-        }
-    }
 }

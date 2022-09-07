@@ -4,3 +4,6 @@
 
 - @TestConfiguration : 테스트 안에서 내부 설정 클래스를 만들어서 사용하면서 이 에노테이션을 붙이면, 
 스프링 부트가 자동으로 만들어주는 빈들에 추가로 필요한 스프링 빈들을 등록하고 테스트를 수행할 수 있다
+
+@TestPropertySource(properties = { "spring.config.location=classpath:application-test.yml" })
+
