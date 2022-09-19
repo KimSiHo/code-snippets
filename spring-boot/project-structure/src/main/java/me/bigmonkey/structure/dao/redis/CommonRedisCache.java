@@ -39,7 +39,7 @@ public class CommonRedisCache {
         if (o == null) {
             return Optional.empty();
         } else {
-            return Optional.ofNullable(objectMapper.readValue((String)o, type));
+            return Optional.ofNullable(objectMapper.readValue((String) o, type));
         }
     }
 
@@ -53,7 +53,7 @@ public class CommonRedisCache {
         List<Object> values = redisTemplate.opsForHash().values(key);
         if (values != null && !values.isEmpty()) {
             for (Object o : values) {
-                T t = objectMapper.readValue((String)o, type);
+                T t = objectMapper.readValue((String) o, type);
                 list.add(t);
             }
         }
@@ -73,5 +73,4 @@ public class CommonRedisCache {
         log.info("commonRedisCache.deleteKey key = {} , deleted = {}", key, delete);
         return delete;
     }
-
 }

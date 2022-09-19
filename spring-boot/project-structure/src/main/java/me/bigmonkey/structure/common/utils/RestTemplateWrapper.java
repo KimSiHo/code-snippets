@@ -27,6 +27,7 @@ import lombok.extern.slf4j.Slf4j;
 @Component
 @RequiredArgsConstructor
 public class RestTemplateWrapper {
+
     private final RestTemplate restTemplate;
     private final ObjectMapper objectMapper;
 
@@ -102,9 +103,8 @@ public class RestTemplateWrapper {
 
     private void handleRestClientException(String url, Exception ex) {
         log.info(MessageFormat.format("HttpClientErrorException Request {0}. (message >>> {1})", url, ex.getMessage()),
-                ex);
+            ex);
         throw new MemberServiceException(MemberErrorCode.UNKNOWN_SERVER_ERROR,
-                MessageFormat.format("Exception Occurred {0}. (message >>> {1})", url, ex.getMessage()), ex);
+            MessageFormat.format("Exception Occurred {0}. (message >>> {1})", url, ex.getMessage()), ex);
     }
-
 }

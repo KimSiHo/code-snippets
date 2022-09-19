@@ -7,10 +7,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class StringConvert {
-    public static String maskingId(String id, IdType idType){
-        if(IdType.IDT001 == idType) {
+
+    public static String maskingId(String id, IdType idType) {
+        if (IdType.IDT001 == idType) {
             return maskingEmail(id);
-        }else {
+        } else {
             return maskingPhone(id);
         }
     }
@@ -29,7 +30,6 @@ public class StringConvert {
 
         return null;
     }
-
 
     public static String decodeBase64(String input) {
         return new String(Base64.getDecoder().decode(input.getBytes(StandardCharsets.UTF_8)), StandardCharsets.UTF_8);
@@ -69,7 +69,7 @@ public class StringConvert {
             String target = matcher.group(1);
             int length = target.length();
 
-            if(length > 3) {
+            if (length > 3) {
                 char[] c = new char[3];
                 Arrays.fill(c, '*');
                 return email.replace(target, target.substring(0, length - 3) + String.valueOf(c));

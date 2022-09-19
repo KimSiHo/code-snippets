@@ -1,4 +1,4 @@
-package me.bigmonkey.temp.enums;
+package me.bigmonkey.java.enums;
 
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;

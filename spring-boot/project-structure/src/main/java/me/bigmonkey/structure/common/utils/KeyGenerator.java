@@ -11,6 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @UtilityClass
 public class KeyGenerator {
+
     public static final String REDIS_CACHE_KEY_SEPARATOR = ":";
 
     static public String createKey(String str1, String str2) {
@@ -33,8 +34,8 @@ public class KeyGenerator {
 
     static public String createKey(String... strs) {
         String createdKey = Arrays.stream(strs)
-                .filter(Objects::nonNull)
-                .collect(Collectors.joining(REDIS_CACHE_KEY_SEPARATOR));
+            .filter(Objects::nonNull)
+            .collect(Collectors.joining(REDIS_CACHE_KEY_SEPARATOR));
         log(createdKey);
         return createdKey;
     }
@@ -42,5 +43,4 @@ public class KeyGenerator {
     private static void log(String key) {
         log.info("keyGenerator.createKey, key = {}", key);
     }
-
 }

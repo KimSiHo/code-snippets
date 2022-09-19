@@ -71,4 +71,18 @@ public class StringControll {
         System.out.println("============= test4 =============");
     }
 
+    // 문자열 슬라이스
+    static class StringSlice{
+
+        public static void main(String[] args) {
+            String a = "abcd efg iam";
+            String substring = a.substring(0, 7);
+            System.out.println("substring = " + substring);
+
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(a, 0, 7);
+            System.out.println(stringBuilder.toString());
+        }
+    }
+
 }

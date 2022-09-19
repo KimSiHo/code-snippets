@@ -9,6 +9,7 @@ import lombok.RequiredArgsConstructor;
 @ConstructorBinding
 @RequiredArgsConstructor
 public class AuthorizationUrlsProperties {
+
     private final String helloWorld;
     private final String token;
 }

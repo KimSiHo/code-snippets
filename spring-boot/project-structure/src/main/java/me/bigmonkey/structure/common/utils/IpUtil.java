@@ -6,8 +6,10 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public final class IpUtil {
+
     /**
      * IP 문자열을 Scope(숫자)로 변환
+     *
      * @param ipAddress
      * @return
      */
@@ -32,9 +34,9 @@ public final class IpUtil {
      */
     public static String longToIp(long ip) {
         return ((ip >> 24) & 0xFF) + "."
-                + ((ip >> 16) & 0xFF) + "."
-                + ((ip >> 8) & 0xFF) + "."
-                + (ip & 0xFF);
+            + ((ip >> 16) & 0xFF) + "."
+            + ((ip >> 8) & 0xFF) + "."
+            + (ip & 0xFF);
     }
 
     public static boolean isIPv4(String ipAddress) {

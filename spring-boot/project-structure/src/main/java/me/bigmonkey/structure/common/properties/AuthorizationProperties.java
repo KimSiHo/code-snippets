@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @ConfigurationProperties(prefix = "authorization")
 public class AuthorizationProperties {
+
     private final String host;
     private final AuthorizationUrlsProperties urls;
 }

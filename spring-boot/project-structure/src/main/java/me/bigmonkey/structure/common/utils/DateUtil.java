@@ -9,6 +9,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class DateUtil {
+
     public static int getAmericanAge(String birthDate) {
 //        LocalDate now = LocalDate.now();
 //        LocalDate parsedBirthDate = LocalDate.parse(birthDate, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -21,7 +22,7 @@ public class DateUtil {
         // 생일이 지났는지 여부를 판단하기 위해 (1)을 입력받은 생년월일의 연도에 더한다.
         // 연도가 같아짐으로 생년월일만 판단할 수 있다!
         if (parsedBirthDate.plusYears(americanAge).isAfter(now)) {
-            americanAge = americanAge -1;
+            americanAge = americanAge - 1;
         }
 
         return americanAge;

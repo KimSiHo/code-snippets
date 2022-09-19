@@ -19,11 +19,12 @@ import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @EnableJpaRepositories(
-        basePackages = "com.test.member.dao.member",
-        entityManagerFactoryRef = "memberEntityManager",
-        transactionManagerRef = "memberTransactionManager"
+    basePackages = "com.test.member.dao.member",
+    entityManagerFactoryRef = "memberEntityManager",
+    transactionManagerRef = "memberTransactionManager"
 )
 public class MemberDataSourceConfiguration {
+
     @Bean(name = "memberHibernateProperties")
     @ConfigurationProperties("spring.jpa.member-properties")
     public HashMap<String, Object> hibernateProperties() {
@@ -55,7 +56,7 @@ public class MemberDataSourceConfiguration {
     }
 
     @Bean(value = "memberHikariConfig")
-    @ConfigurationProperties(prefix="spring.datasource-member.hikari")
+    @ConfigurationProperties(prefix = "spring.datasource-member.hikari")
     public HikariConfig hikariConfig() {
         return new HikariConfig();
     }

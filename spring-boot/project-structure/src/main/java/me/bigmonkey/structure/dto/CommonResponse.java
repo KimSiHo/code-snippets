@@ -11,6 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class CommonResponse<T> {
+
     @Schema(description = "응답 코드", example = "21000")
     private Integer code = 21000;
 

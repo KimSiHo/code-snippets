@@ -5,9 +5,9 @@ public class 네이버_기출_2 {
     static String keyword = "mask";
     static int[] skips = {0, 0, 3, 2, 3, 4};*/
 
- /*   static String sentence = "i love coding";
-    static String keyword = "mode";
-    static int[] skips = {0, 10};*/
+//    static String sentence = "i love coding";
+//    static String keyword = "mode";
+//    static int[] skips = {0, 10};
 
    /* static String sentence = "abcde fghi";
     static String keyword = "xyz";
@@ -19,37 +19,35 @@ public class 네이버_기출_2 {
 
     public static void main(String[] args) {
 
-        int numCharOfSentence = sentence.length();
+        int sizeOfSentence = sentence.length();
+        int curSentenceIndex = 0;
         int keywordIndex = 0;
-        int skipIndex = 0;
         StringBuilder ret = new StringBuilder();
 
-        for (int i = 0; i < numCharOfSentence+1; ) {
-            if(skipIndex == skips.length) {
-                ret.append(sentence.substring(i, numCharOfSentence));
+        for (int skip : skips) {
+            int dupCharIndex = sentence.indexOf(keyword.charAt(keywordIndex % keyword.length()), curSentenceIndex);
+
+            if (dupCharIndex != -1) {
+                dupCharIndex++;
+                if (dupCharIndex - curSentenceIndex < skip) {
+                    skip = dupCharIndex - curSentenceIndex;
+                }
+            }
+
+            if (curSentenceIndex + skip > sizeOfSentence) {
+                ret.append(sentence, curSentenceIndex, sizeOfSentence);
                 break;
             }
 
-            int skip = skips[skipIndex++];
-            char keywordChar = keyword.charAt(keywordIndex++ % keyword.length());
-            int skipCount = 0;
+            ret.append(sentence, curSentenceIndex, curSentenceIndex + skip);
+            ret.append(keyword.charAt(keywordIndex++ % keyword.length()));
+            curSentenceIndex += skip;
+        }
 
-            if(i + skip > numCharOfSentence) {
-                ret.append(sentence.substring(i, numCharOfSentence));
-                break;
-            }
-            String substring = sentence.substring(i, i + skip);
-            int findIndex = substring.indexOf(keywordChar);
-            if(findIndex == -1) skipCount = skip;
-            else skipCount = findIndex;
-
-            ret.append(sentence.substring(i, i+skipCount));
-            ret.append(keywordChar);
-
-            i += skipCount;
+        if(curSentenceIndex < sizeOfSentence) {
+            ret.append(sentence, curSentenceIndex, sizeOfSentence);
         }
 
         System.out.println(ret.toString());
     }
-
 }

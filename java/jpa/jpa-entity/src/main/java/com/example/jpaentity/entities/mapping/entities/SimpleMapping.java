@@ -19,7 +19,7 @@ public class SimpleMapping {
     private Long id;
 
     // 이렇게 단일로 주는 unique는 잘 쓰지 않는다, 단일 컬럼 뿐이 안되고 이름이 랜덤 생성된 문자열이어서 파악하기 힘들다
-    @Column(unique = true, length = 10)
+    @Column(unique = true, length = 10, nullable = false)
     private String name;
 
     @Column

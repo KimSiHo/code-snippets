@@ -1,5 +1,7 @@
 package me.bigmonkey.java.jcf.map;
 
+import static java.util.Comparator.comparing;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -116,5 +118,20 @@ public class JavaMap {
             System.out.println(testMap.get(nKey));
         }
 
+    }
+
+    static class temp {
+
+        public static void main(String[] args) {
+            Map<String, Object> temp = new HashMap<>();
+            temp.put("1", 1);
+
+            Object o = temp.get(1);
+            Object o1 = temp.get(2);
+
+            Long a = 3L;
+
+            System.out.println("o1 = " + o1);
+        }
     }
 }

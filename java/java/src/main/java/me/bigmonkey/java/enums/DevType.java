@@ -1,4 +1,4 @@
-package me.bigmonkey.temp.enums;
+package me.bigmonkey.java.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

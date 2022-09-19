@@ -1,4 +1,3 @@
-
 test.hi: default
 test.default: basic-test
 

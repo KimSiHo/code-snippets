@@ -22,6 +22,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @ConfigurationProperties(prefix = "http-client")
 public class HttpClientProperties {
+
     @DurationUnit(ChronoUnit.MILLIS)
     private final Duration connectTimeout;
 

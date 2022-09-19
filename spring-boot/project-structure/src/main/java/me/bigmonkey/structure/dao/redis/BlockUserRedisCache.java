@@ -15,6 +15,7 @@ import com.etoos.member.dto.cache.BlockUser;
 
 @Component
 public class BlockUserRedisCache {
+
     private HashOperations<String, String, BlockUser> hashOperations;
 
     @Resource(name = "ServiceObjectTemplate")
@@ -30,29 +31,29 @@ public class BlockUserRedisCache {
 
     public List<BlockUser> findMemberBlocksInfo(Long memberNo, ServiceCode serviceCode) {
         return hashOperations
-                .values(KEY_SPACE + KEY_SEPARATOR + memberNo + KEY_SEPARATOR + serviceCode.toString());
+            .values(KEY_SPACE + KEY_SEPARATOR + memberNo + KEY_SEPARATOR + serviceCode.toString());
     }
 
     public BlockUser findMemberBlockInfoByField(Long memberNo, ServiceCode serviceCode, String blockSeq) {
         return hashOperations
-                .get(KEY_SPACE + KEY_SEPARATOR + memberNo + KEY_SEPARATOR + serviceCode.toString(), blockSeq);
+            .get(KEY_SPACE + KEY_SEPARATOR + memberNo + KEY_SEPARATOR + serviceCode.toString(), blockSeq);
     }
 
     public void save(Long memberNo, ServiceCode serviceCode, List<BlockUser> memberBlocks) {
         memberBlocks.stream().forEach(memberBlock -> {
             hashOperations.put(KEY_SPACE + KEY_SEPARATOR + memberNo + KEY_SEPARATOR + serviceCode.toString(),
-                    memberBlock.getSeqMemberBlock().toString(), memberBlock);
+                memberBlock.getSeqMemberBlock().toString(), memberBlock);
         });
     }
 
     public void deleteByField(Long memberNo, ServiceCode serviceCode, Long field) {
         hashOperations.delete(KEY_SPACE + KEY_SEPARATOR + memberNo + KEY_SEPARATOR + serviceCode.toString(),
-        Long.toString(field));
+            Long.toString(field));
     }
 
     public void deleteAll(Long memberNo, ServiceCode serviceCode) {
         hashOperations.getOperations()
-                .delete(KEY_SPACE + KEY_SEPARATOR + memberNo + KEY_SEPARATOR + serviceCode.toString());
+            .delete(KEY_SPACE + KEY_SEPARATOR + memberNo + KEY_SEPARATOR + serviceCode.toString());
     }
 }
 

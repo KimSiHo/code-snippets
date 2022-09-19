@@ -17,12 +17,13 @@ import lombok.extern.slf4j.Slf4j;
 @RequestMapping(path = "/l7check")
 @RequiredArgsConstructor
 public class L7CheckApi {
+
     private final ApplicationHealthIndicator healthIndicator;
 
     @GetMapping
     public ResponseEntity<Void> health() {
         final HttpStatus responseStatus =
-                Status.UP == healthIndicator.health().getStatus() ? HttpStatus.OK : HttpStatus.SERVICE_UNAVAILABLE;
+            Status.UP == healthIndicator.health().getStatus() ? HttpStatus.OK : HttpStatus.SERVICE_UNAVAILABLE;
 
         return ResponseEntity.status(responseStatus).build();
     }

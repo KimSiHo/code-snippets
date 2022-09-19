@@ -16,13 +16,14 @@ import lombok.experimental.UtilityClass;
 
 @UtilityClass
 public final class GenerationCode {
+
     private static final SecureRandom random = new SecureRandom();
     private static final char[] characterTable = {
-            'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-            'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-            'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-            'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-            '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'
+        'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
+        'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
+        'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+        'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+        '1', '2', '3', '4', '5', '6', '7', '8', '9', '0'
     };
 
     /**
@@ -32,8 +33,8 @@ public final class GenerationCode {
      * @return
      */
     public static String generateCodeNumber(int codeLength) {
-        final int range = (int)Math.pow(10.0, codeLength);
-        final int trim = (int)Math.pow(10.0, codeLength - 1.0);
+        final int range = (int) Math.pow(10.0, codeLength);
+        final int trim = (int) Math.pow(10.0, codeLength - 1.0);
 
         int result = random.nextInt(range) + trim;
         if (result > range) {
@@ -60,8 +61,7 @@ public final class GenerationCode {
     }
 
     /**
-     * UUID 기반의 22자리 unique ID 생성
-     * (16진수 36자리 UUID -> 64진수 22자리 UUID)
+     * UUID 기반의 22자리 unique ID 생성 (16진수 36자리 UUID -> 64진수 22자리 UUID)
      *
      * @return 22자리의 UUID
      */
@@ -71,7 +71,7 @@ public final class GenerationCode {
         final long lsb = uuid.getLeastSignificantBits();
 
         final byte[] base64UUID = Base64.encodeBase64(
-                mergeBytes(longToByteBigEndian(msb), longToByteBigEndian(lsb)), false, true);
+            mergeBytes(longToByteBigEndian(msb), longToByteBigEndian(lsb)), false, true);
         return StringUtils.newStringUsAscii(base64UUID);
     }
 
@@ -79,7 +79,7 @@ public final class GenerationCode {
         final byte[] bytes = new byte[8];
 
         for (int i = 7; i >= 0; --i) {
-            bytes[i] = (byte)((int)l);
+            bytes[i] = (byte) ((int) l);
             l >>>= 8;
         }
 

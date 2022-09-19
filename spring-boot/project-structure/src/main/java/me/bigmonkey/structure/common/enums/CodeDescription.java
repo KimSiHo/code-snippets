@@ -5,5 +5,6 @@
 package me.bigmonkey.structure.common.enums;
 
 public interface CodeDescription {
+
     String getDescription();
 }
